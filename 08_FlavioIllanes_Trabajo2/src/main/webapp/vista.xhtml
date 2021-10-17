@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+    </h:head>
+    <p:growl id="mensaje" showDetail="true" />
+    <h:body>
+        <style>
+            body{background-color: lightsteelblue;}
+        </style>
+        <center>
+        <div class="card">
+            
+                
+            
+            <h:form>
+                <p:messages id="msgs"/>
+                <h1>
+                    Validación Básica
+                </h1> 
+                <h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+                    <p:outputLabel for="NombreTxt" value="Nombre"/>
+                    <p:inputText id="NombreTxt"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <p:message for="NombreTxt"  id="msgName" showDetail="true" />
+
+                    <p:outputLabel for="ApellidoTxt" value="Apellido"/>
+                    <p:inputText id="ApellidoTxt"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                        <p:ajax update="msgLastname" event="keyup"/>
+                    </p:inputText>
+                    <p:message for="ApellidoTxt" id="msgLastname"  showDetail="true" />
+
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar" update="msgName msgLastname" /><!--
+-->            </h:form>
+            <h:form>
+
+
+                <h1>
+                    Validación Bean
+                </h1> 
+                <h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+                    <p:outputLabel for="NombreTxt" value="Nombre"/>
+                    <p:inputText id="NombreTxt" value="#{controlC.usu.nombre}"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <p:message for="NombreTxt"  id="msgName" showDetail="true" />
+
+                    <p:outputLabel for="ApellidoTxt" value="Apellido"/>
+                    <p:inputText id="ApellidoTxt"  value="#{controlC.usu.apellido}" required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                        <p:ajax update="msgLastname" event="keyup"/>
+                    </p:inputText>
+                    <p:message for="ApellidoTxt" id="msgLastname"  showDetail="true" />
+
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar" action="#{controlC.validar()}" update="msgName msgLastname mensaje" />
+
+
+            </h:form>
+
+            <h:form>
+
+
+                <h1>
+                    Validación Custom
+                </h1> 
+                <h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+                    <p:outputLabel for="NombreTxt" value="Nombre"/>
+                    <p:inputText id="NombreTxt" value="#{controlC.usu.nombre}"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <p:message for="NombreTxt"  id="msgName" showDetail="true" />
+
+                    <p:outputLabel for="ApellidoTxt" value="Apellido"/>
+                    <p:inputText id="ApellidoTxt"  value="#{controlC.usu.apellido}" required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                        <!--<p:ajax update="msgLastname" event="keyup"/>-->
+                    </p:inputText>
+                    <p:message for="ApellidoTxt" id="msgLastname"  showDetail="true" />
+                    
+                    <p:outputLabel for="CorreoTxt" value="Correo"/>
+                    <p:inputText id="CorreoTxt" value="#{controlC.usu.correo}"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="10"/>
+                        <f:validator validatorId="correoV" />
+                    </p:inputText>
+                    <p:message for="CorreoTxt"  id="msgCorreo" showDetail="true" />
+                    
+                    
+                    
+                    
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar" action="#{controlC.validar()}" update="msgName msgLastname mensaje msgCorreo" />
+
+
+            </h:form>
+            
+            <h:form>
+
+
+                <h1>
+                    Validación Custom / Password
+                </h1> 
+                <h:panelGrid columns="3" cellpadding="7" styleClass="p-mb-3">
+                    <p:outputLabel for="NombreTxt" value="Nombre"/>
+                    <p:inputText id="NombreTxt" value="#{controlC.usu.nombre}"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                    </p:inputText>
+                    <p:message for="NombreTxt"  id="msgName" showDetail="true" />
+
+                    <p:outputLabel for="ApellidoTxt" value="Apellido"/>
+                    <p:inputText id="ApellidoTxt"  value="#{controlC.usu.apellido}" required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="2"/>
+                        <!--<p:ajax update="msgLastname" event="keyup"/>-->
+                    </p:inputText>
+                    <p:message for="ApellidoTxt" id="msgLastname"  showDetail="true" />
+                    
+                    <p:outputLabel for="CorreoTxt" value="Correo"/>
+                    <p:inputText id="CorreoTxt" value="#{controlC.usu.correo}"  required="true" requiredMessage="Se necesita un valor">
+                        <f:validateLength minimum="10"/>
+                        <f:validator validatorId="correoV" />
+                    </p:inputText>
+                    <p:message for="CorreoTxt"  id="msgCorreo" showDetail="true" />
+                    
+                   
+                    
+                    
+                </h:panelGrid>
+                
+                
+
+                <p:commandButton value="Enviar" action="#{controlC.validar()}" update="msgName msgLastname mensaje msgCorreo" />
+                </h:form>
+            <h:form>
+                <h:panelGrid>
+                    <p:outputLabel for="contraTxt" value="Contraseña"/>
+                    <p:password id="contraTxt" required="true"  value="#{controlC.usu.contrasena}" requiredMessage="Se necesita un valor">
+                        
+                    </p:password>
+                    <p:message for="contraTxt"  id="msgContra" showDetail="true" />
+                </h:panelGrid>
+                 
+                    
+                <p:commandButton value="Confirmar" action="#{controlC.validarContrasena()}" update="  mensaje msgContra" />
+
+            </h:form>
+
+        </div>
+        </center> 
+    </h:body>
+</html>
+
