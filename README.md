@@ -1,1 +1,1 @@
-# Trabajo2_FPF2
+# validaciones de datos  customizable (correo), Primefaces + JSF + DAO + ORACLE
